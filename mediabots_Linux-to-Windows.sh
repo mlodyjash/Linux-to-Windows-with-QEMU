@@ -96,7 +96,7 @@ custom_param_os="/mediabots/"$(ls /mediabots)
 custom_param_sw="/sw.iso"
 custom_param_virtio="/virtio/"$(ls /virtio)
 #
-custom_param_ram="-m "$(expr $availableRAM - 200 )"M"
+custom_param_ram="-m "$(expr $availableRAM - 1000 )"M"
 skipped=0
 partition=0
 other_drives=""
@@ -128,7 +128,7 @@ if [ $availableRAM -ge 4650 ] ; then # opened 2nd if
 		custom_param_sw="/media/sw/sw.iso"
 		availableRAM=$(echo $availableRAMcommand | bash)
 		custom_param_disk=$firstDisk
-		custom_param_ram="-m "$(expr $availableRAM - 500 )"M"
+		custom_param_ram="-m "$(expr $availableRAM - 1000 )"M"
 		format=""
 		mounted=1
 	else
@@ -197,7 +197,7 @@ if [ $availableRAM -ge 4650 ] ; then
 		custom_param_sw="/media/sw/sw.iso"
 		availableRAM=$(echo $availableRAMcommand | bash)
 		custom_param_disk=$firstDisk
-		custom_param_ram="-m "$(expr $availableRAM - 500 )"M"
+		custom_param_ram="-m "$(expr $availableRAM - 1000 )"M"
 		format=""
 		mounted=1
 	else
@@ -266,8 +266,8 @@ df
 sync; echo 3 > /proc/sys/vm/drop_caches
 free -m 
 availableRAM=$(echo $availableRAMcommand | bash)
-custom_param_ram="-m "$(expr $availableRAM - 200 )"M"
-custom_param_ram2="-m "$(expr $availableRAM - 500 )"M"
+custom_param_ram="-m "$(expr $availableRAM - 1000 )"M"
+custom_param_ram2="-m "$(expr $availableRAM - 1000 )"M"
 echo $custom_param_ram
 echo "[..] running QEMU-KVM again"
 $qemupath -net nic -net user,hostfwd=tcp::3389-:3389 -show-cursor $custom_param_ram -localtime -enable-kvm -cpu host,hv_relaxed,hv_spinlocks=0x1fff,hv_vapic,hv_time,+nx -M pc -smp cores=$cpus -vga std -machine type=pc,accel=kvm -usb -device usb-tablet -k en-us -drive file=$custom_param_disk,index=0,media=disk -drive file=$custom_param_sw,index=1,media=cdrom $other_drives -boot c -vnc :9 &
