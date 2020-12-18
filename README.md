@@ -12,6 +12,8 @@
 
 `gcloud compute ssh nested-vm --zone=us-central1-b`
 
+`gcloud compute ssh nested-vm --zone=europe-west3-a`
+
 `grep -cw vmx /proc/cpuinfo` if you get amount higher than 0, it means that commands works and you got nested virtualization intance :) 
 
 
