@@ -8,6 +8,8 @@
 
 `gcloud compute instances create nested-vm --zone us-central1-b --image=nested-vm-image --machine-type=n2-standard-8 --boot-disk-size=250GB`
 
+`gcloud compute instances create nested-vm --zone europe-west3-a --image=nested-vm-image --machine-type=n2-standard-4 --boot-disk-size=250GB`
+
 `gcloud compute ssh nested-vm --zone=us-central1-b`
 
 `grep -cw vmx /proc/cpuinfo` if you get amount higher than 0, it means that commands works and you got nested virtualization intance :) 
